@@ -5,6 +5,7 @@ let alertValidacionesTexto = document.getElementById("alertValidacionesTexto")
 let alertValidaciones = document.getElementById("alertValidaciones")
 let tablaListaCompras = document.getElementById("tablaListaCompras");
 const cuerpoTabla = tablaListaCompras.getElementsByTagName("tbody").item(0);
+let btnClear = document.getElementById("btnClear");
 
 let contadorProductos = document.getElementById("contadorProductos");
 let productosTotal = document.getElementById("productosTotal");
@@ -61,7 +62,7 @@ btnAgregar.addEventListener("click", function(event){
     }
 
     if (! validarCantidad()) {
-        txtName.style.border = "solid 3px red";
+        txtNumber.style.border = "solid 3px red";
         alertValidacionesTexto.innerHTML += "</br><strong> La cantidad no es correcta </strong>";   // Se agrega por eso es "+="
         alertValidaciones.style.display = "block";
         isValid = false;
@@ -145,4 +146,38 @@ window.addEventListener("load", function(event) {
 
 
 }); // fin window
+
+// Agregar la funcionalidad del boton limpiar todo
+    // Resume
+    // Tabla    
+    // campos
+    // alertas
+    // localStorage (resumen y datos)
+
+    btnClear.addEventListener("click", function(){
+        // vaciar la tabla
+        cuerpoTabla.innerHTML = "";
+
+        // poner en 0 los contadores
+        cont = 0;
+        totalEnProductos = 0;
+        costoTotal = 0;
+
+        // actualizamos el apartado de resumen
+        contadorProductos.innerText = "0";
+        productosTotal.innerText = "0";
+        precioTotal.innerText = "$ 0";
+
+        // alertas
+        alertValidaciones.style.display = "none";
+        alertValidacionesTexto.innerHTML = "";
+
+        // Limpiar localStorage y datos
+        localStorage.removeItem("datos");
+        localStorage.removeItem("resumen");
+        datos = [];
+
+        txtName.focus();
+
+    });
 
